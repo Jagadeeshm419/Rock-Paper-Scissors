@@ -1,0 +1,40 @@
+body {
+  background-color: rgb(25, 25, 25);
+  color: white;
+  font-family: Arial;
+}
+
+.title {
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.img-icon {
+  height: 50px;
+}
+
+.img-button {
+  cursor: pointer;
+  background-color: transparent;
+  border: 3px solid white;
+  border-radius: 60px;
+  height: 120px;
+  width: 120px;
+  margin-right: 10px;
+  margin-bottom: 30px;
+
+}
+
+.js-result {
+  font-size: 25px;
+  font-weight: bold;
+  margin-bottom: 40px;
+}
+
+.reset {
+  background-color: white;
+  border: none;
+  font-size: 15px;
+  padding: 8px 15px;
+  cursor: pointer;
+}
