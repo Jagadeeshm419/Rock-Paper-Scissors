@@ -26,6 +26,7 @@ let score = JSON.parse(localStorage.getItem('score')) || {
 };
 updateScore();
 
+//Player Move:
 function playGame(playerMove) {
   let computerMove = pickComputerMove();
   let result = '';
@@ -92,3 +93,85 @@ function playGame(playerMove) {
 function updateScore() {
   document.querySelector('.js-score').innerHTML = `Wins : ${score.Wins}, Losses : ${score.Losses}, Ties : ${score.Ties}`
 }
+
+//Autoplay Game:
+isAutoPlaying = false;
+let intervalId;
+
+function autoplay(){
+
+  if(!isAutoPlaying){
+    intervalId = setInterval(() => {
+      const playerMove = pickComputerMove();
+      playGame(playerMove);
+    }, 1000);
+
+    isAutoPlaying=true;
+  }
+
+  else{
+    clearInterval(intervalId);
+    isAutoPlaying=false;
+  }
+}
+
+/*Adding EventListener: */
+
+//RPS KeyDown :
+document.body.addEventListener('keydown', (event) =>{
+  if(event.key==='r'){
+    playGame('Rock');
+  }
+  else if(event.key==='p'){
+    playGame('Paper');
+  }
+  else if(event.key==='s'){
+    playGame('Scissors');
+  }
+});
+
+//Rock Button:
+document.querySelector('.rock-img-button').addEventListener('click', () => {
+  playGame('Rock');
+}); 
+
+//Paper Button:
+document.querySelector('.paper-img-button').addEventListener('click', () => {
+  playGame('Paper');
+});
+
+//Scissors Button:
+document.querySelector('.scissors-img-button').addEventListener('click', () => {
+  playGame('Scissors');
+});
+
+//Reset Button:
+function reset () {
+  score.Wins = 0;
+  score.Losses = 0;
+  score.Ties = 0;
+  localStorage.removeItem('score');
+  updateScore();
+}
+document.querySelector('.reset').addEventListener('click', () => {
+  reset();
+});
+
+//Reset Button KeyDown:
+document.body.addEventListener('keydown', (event) => {
+  if(event.key=== 'Escape'){
+    reset();
+  }
+});
+
+//Autoplay Button:
+document.querySelector('.js-autoplay').addEventListener('click', () => {
+  autoplay()
+});
+
+//AutoPlay Button KeyDown:
+document.body.addEventListener('keydown', (event) => {
+  if(event.key=== 'a'){
+    autoplay();
+  }
+});
